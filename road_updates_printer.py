@@ -2,6 +2,7 @@ import time
 import requests
 from bs4 import BeautifulSoup
 from Adafruit_Thermal import Adafruit_Thermal
+from datetime import datetime
 
 ROAD_URL = "https://roads.dot.ca.gov/roadscell.php?roadnumber=50"
 CHECK_INTERVAL = 15 * 60  # 15 minutes
@@ -19,22 +20,18 @@ def fetch_road_conditions():
 def print_road_conditions(printer, message):
     printer.feed(1)
     printer.boldOn()
-    printer.println("Hwy 50 Road Report:")
+    printer.println(f"Hwy 50 Road Report at {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}:")
     printer.boldOff()
     printer.feed(1)
 
-    # Wrap text to printer width
-    import textwrap
     for line in message.splitlines():
-        wrapped = textwrap.wrap(line, width=32)
-        for wline in wrapped:
-            printer.println(wline)
+        printer.println(line)
+
     printer.feed(3)
 
 def main():
     printer = Adafruit_Thermal("/dev/serial0", 19200, timeout=5)
-    printer.println("Starting Road Watcher...")
-    printer.feed(2)
+    print("Starting Road Watcher...")
 
     last_message = None
 
