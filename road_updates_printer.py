@@ -2,7 +2,6 @@ import time
 import requests
 from bs4 import BeautifulSoup
 from Adafruit_Thermal import Adafruit_Thermal
-from datetime import datetime
 
 ROAD_URL = "https://roads.dot.ca.gov/roadscell.php?roadnumber=50"
 CHECK_INTERVAL = 15 * 60  # 15 minutes
@@ -10,7 +9,7 @@ CHECK_INTERVAL = 15 * 60  # 15 minutes
 def fetch_road_conditions():
     try:
         headers = {
-            "User-Agent": "Mozilla/5.0 (X11; Linux armv7l) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36"
+            "User-Agent": "Mozilla/5.0"
         }
         response = requests.get(ROAD_URL, headers=headers, timeout=10)
         response.raise_for_status()
@@ -21,25 +20,33 @@ def fetch_road_conditions():
         if not middle_div:
             return "Could not find road data section."
 
-        # Clean all the tags and join the visible text
-        road_text = middle_div.get_text(separator="\n").strip()
-        return road_text
+        full_text = middle_div.get_text(separator="\n").strip()
+
+        # Only keep content starting from the "This highway information..." line
+        marker = "This highway information"
+        start_index = full_text.find(marker)
+        if start_index == -1:
+            return "Could not find road condition start."
+
+        trimmed_text = full_text[start_index:]
+
+        # Clean up: collapse multiple newlines into a single one
+        import re
+        clean_text = re.sub(r'\n+', '\n', trimmed_text)
+
+        return f"{clean_text}"
 
     except Exception as e:
         return f"Error fetching road data: {e}"
 
 
 def print_road_conditions(printer, message):
-    printer.feed(1)
-    printer.boldOn()
-    printer.println(f"Hwy 50 Road Report at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}:")
-    printer.boldOff()
-    printer.feed(1)
+    printer.feed(2)
 
     for line in message.splitlines():
         printer.println(line)
 
-    printer.feed(3)
+    printer.feed(2)
 
 def main():
     printer = Adafruit_Thermal("/dev/serial0", 19200, timeout=5)
@@ -52,7 +59,7 @@ def main():
         conditions = fetch_road_conditions()
 
         if conditions != last_message:
-            print("New information. Printing...")
+            print(f"**New information. Printing...**\n{conditions}")
             print_road_conditions(printer, conditions)
             last_message = conditions
         else:
