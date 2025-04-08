@@ -9,13 +9,25 @@ CHECK_INTERVAL = 15 * 60  # 15 minutes
 
 def fetch_road_conditions():
     try:
-        response = requests.get(ROAD_URL, timeout=10)
+        headers = {
+            "User-Agent": "Mozilla/5.0 (X11; Linux armv7l) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36"
+        }
+        response = requests.get(ROAD_URL, headers=headers, timeout=10)
         response.raise_for_status()
+
         soup = BeautifulSoup(response.text, 'html.parser')
-        pre_tag = soup.find('pre')
-        return pre_tag.text.strip() if pre_tag else "No data found."
+        middle_div = soup.find("div", id="middle_column")
+
+        if not middle_div:
+            return "Could not find road data section."
+
+        # Clean all the tags and join the visible text
+        road_text = middle_div.get_text(separator="\n").strip()
+        return road_text
+
     except Exception as e:
         return f"Error fetching road data: {e}"
+
 
 def print_road_conditions(printer, message):
     printer.feed(1)

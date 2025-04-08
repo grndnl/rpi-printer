@@ -66,7 +66,7 @@ Install:
 ```
 python -m venv venv
 source venv/bin/activate
-pip install requests beautifulsoup4
+pip install requests beautifulsoup4 pyserial
 ```
 
 Run:
