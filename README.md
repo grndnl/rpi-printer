@@ -1,6 +1,3 @@
-# !!! NOTE !!!
-# THIS REPOSITORY IS ARCHIVED AND IS NO LONGER SUPPORTED OR MAINTAINED
-
 # Python-Thermal-Printer Module
 
 Python3 port of the original Adafruit [Python-Thermal-Printer](https://github.com/adafruit/Python-Thermal-Printer) library.
@@ -28,6 +25,7 @@ sudo apt-get install git cups wiringpi build-essential libcups2-dev libcupsimage
 Install the printer driver. Don't worry about the warnings that g++ gives.
 
 ``` shell
+sudo apt-get install libcups2-dev libcupsimage2-dev g++ cups cups-client
 git clone https://github.com/adafruit/zj-58
 cd zj-58
 make
@@ -48,5 +46,3 @@ git clone https://github.com/galacticfan/Python-Thermal-Printer/
 cd Python-Thermal-Printer
 python3 printertest.py
 ```
-
-Let me know if you have any issues.
