@@ -13,7 +13,7 @@ i_feed = 3
 f_pause = 1.0
 
 # Define the printer port, speed, and timeout
-printer = Adafruit_Thermal("/dev/ttyS0", 19200, timeout=5)
+printer = Adafruit_Thermal("/dev/serial0", 19200, timeout=5)
 
 # Build the date stamp in the format YYYY-MM-DD ex: "2021-12-25"
 datestamp = time.strftime("%Y-%m-%d", time.gmtime())
