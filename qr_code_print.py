@@ -27,7 +27,7 @@ qr_img = qr.make_image(fill_color="black", back_color="white").convert('1')
 qr_img.save("qr_email.bmp")
 
 # Initialize printer
-printer = Adafruit_Thermal(serial.Serial(PRINTER_PORT, BAUD_RATE, timeout=5))
+printer = Adafruit_Thermal(PRINTER_PORT, BAUD_RATE, timeout=5)
 
 # Optional: Feed and center
 printer.feed(1)
