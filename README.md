@@ -69,7 +69,18 @@ source venv/bin/activate
 pip install requests beautifulsoup4 pyserial
 ```
 
-Run:
+Test:
 ```
 python road_updates_printer.py
+```
+
+Run in background:
+```
+nohup /home/admin/rpi-printer/venv/bin/python road_updates_printer.py > log-road.txt 2>&1 &
+```
+
+Kill:
+```
+ps aux | grep road_updates_printer.py
+kill <PID>
 ```

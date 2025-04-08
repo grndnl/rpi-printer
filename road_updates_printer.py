@@ -41,12 +41,12 @@ def fetch_road_conditions():
 
 
 def print_road_conditions(printer, message):
-    printer.feed(2)
+    printer.feed(1)
 
     for line in message.splitlines():
         printer.println(line)
 
-    printer.feed(2)
+    printer.feed(3)
 
 def main():
     printer = Adafruit_Thermal("/dev/serial0", 19200, timeout=5)
