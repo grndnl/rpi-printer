@@ -42,7 +42,22 @@ sudo lpoptions -d ZJ-58
 Restart the system. Clone this repository and try to run *printertest.py*.
 
 ``` shell
-git clone https://github.com/galacticfan/Python-Thermal-Printer/
-cd Python-Thermal-Printer
-python3 printertest.py
+git clone https://github.com/grndnl/rpi-printer/
+cd rpi-printer
+python printertest.py
+```
+
+
+## Usage
+
+```
+nohup python email_printer.py &
+```
+
+```
+python echo_printer.py
+```
+
+```
+
 ```
