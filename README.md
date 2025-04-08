@@ -50,14 +50,26 @@ python printertest.py
 
 ## Usage
 
+### Email printer
 ```
 nohup python email_printer.py &
 ```
 
+### Echo printer from ssh
 ```
 python echo_printer.py
 ```
 
+### Road updates printer
+
+Install:
+```
+python -m venv venv
+source venv/bin/activate
+pip install requests beautifulsoup4
 ```
 
+Run:
+```
+python road_updates_printer.py
 ```
