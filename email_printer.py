@@ -5,6 +5,8 @@ import imaplib
 import email
 from email.header import decode_header
 from Adafruit_Thermal import Adafruit_Thermal
+from datetime import datetime
+
 
 # Load email credentials from config.ini
 config = configparser.ConfigParser()
@@ -69,7 +71,8 @@ def check_and_print_emails():
                 # Print to thermal printer
                 printer.feed(1)
                 printer.boldOn()
-                printer.println("New Email!")
+
+                printer.println("New Email at " + datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
                 printer.boldOff()
                 printer.println("From: " + from_)
                 printer.println("Subject: " + subject)
