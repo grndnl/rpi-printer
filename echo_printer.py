@@ -9,7 +9,7 @@ def main():
     printer.boldOn()
     printer.println("Thermal Printer Ready!")
     printer.boldOff()
-    printer.feed(1)
+    printer.feed(2)
 
     print("Type your message. Type 'exit' to quit.\n")
     
