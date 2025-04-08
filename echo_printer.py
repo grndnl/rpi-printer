@@ -7,7 +7,7 @@ def main():
     printer = Adafruit_Thermal("/dev/serial0", 19200, timeout=5)
 
     printer.boldOn()
-    printer.println("Thermal Printer Ready!")
+    printer.println("Message:")
     printer.boldOff()
     printer.feed(2)
 
@@ -15,16 +15,16 @@ def main():
     
     while True:
         try:
-            message = input("You: ")
+            message = input("Message: ")
             if message.lower() == "exit":
-                printer.println("Goodbye!")
+                printer.println("End Message.")
                 printer.feed(2)
                 break
 
             printer.println(message)
             printer.feed(1)
         except KeyboardInterrupt:
-            printer.println("Interrupted. Bye!")
+            printer.println("Message Interrupted.")
             printer.feed(2)
             break
 
