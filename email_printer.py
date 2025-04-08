@@ -36,8 +36,7 @@ def check_and_print_emails():
     email_ids = messages[0].split()
 
     if not email_ids:
-        printer.println("No new emails.")
-        printer.feed(1)
+        print("No new emails.")
         return
 
     for num in email_ids:
