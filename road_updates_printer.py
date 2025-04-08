@@ -20,7 +20,7 @@ def fetch_road_conditions():
 def print_road_conditions(printer, message):
     printer.feed(1)
     printer.boldOn()
-    printer.println(f"Hwy 50 Road Report at {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}:")
+    printer.println(f"Hwy 50 Road Report at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}:")
     printer.boldOff()
     printer.feed(1)
 
