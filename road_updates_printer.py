@@ -58,7 +58,7 @@ def main():
         print("Checking road conditions...")
         conditions = fetch_road_conditions()
 
-        if conditions[98:] != last_message[98:]:
+        if last_message is None or conditions[98:] != last_message[98:]:
             print(f"**New information. Printing...**\n{conditions}")
             print_road_conditions(printer, conditions)
             last_message = conditions
