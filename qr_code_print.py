@@ -5,7 +5,7 @@ import time
 from Adafruit_Thermal import Adafruit_Thermal
 
 # Configuration
-EMAIL = "mailto:1961mewuk@gmail.com"
+EMAIL = "email"
 QR_BOX_SIZE = 10  # Increase size for better print quality
 PRINTER_PORT = "/dev/serial0"
 BAUD_RATE = 19200
